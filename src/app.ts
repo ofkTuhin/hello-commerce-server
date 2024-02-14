@@ -5,9 +5,19 @@ import { globalErrorhandler } from "./app/middleware/globalerrorhandler";
 import routes from "./app/routes/routes";
 const app: Application = express();
 // Define an array of allowed origins
+const allowlist = ["http://example1.com", "http://example2.com"];
+const corsOptionsDelegate = function (req: any, callback: any) {
+  let corsOptions;
+  if (allowlist.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
 
 // Configure CORS middleware with multiple allowed origins
-app.use(cors());
+app.use(cors(corsOptionsDelegate));
 
 app.use(express.json());
 app.use(cookieParser());
