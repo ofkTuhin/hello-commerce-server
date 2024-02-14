@@ -1,7 +1,6 @@
 import express from "express";
 // import { ENUM_USER_ROLES } from '../../../enums/user'
 // import auth from '../../middleware/auth'
-import auth from "../../middleware/auth";
 import { cartController } from "./cart.controller";
 // import { StudentValidaion } from './cart.validation'
 const router = express.Router();
@@ -22,7 +21,7 @@ router.patch(
   //     ENUM_USER_ROLES.STUDENT,
   //   ),
 
-  auth(),
+  // auth(),
   cartController.updateCart
 );
 

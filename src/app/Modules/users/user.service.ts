@@ -8,7 +8,6 @@ import { IRefreshTokenAccess, UserSchema } from "./user.interface";
 import { User } from "./user.model";
 
 const createUser = async (user: UserSchema): Promise<UserSchema> => {
-  console.log(user);
   const id = user.email.split("@")[0];
   user.id = id;
   const [newUser] = await User.create([user]);
@@ -19,7 +18,6 @@ const loginUser = async (payload: UserSchema) => {
   const { email: id, password } = payload;
   const user = new User();
   const userData = await user.isUserExist(id);
-  console.log({ userData });
   if (!userData) {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
@@ -41,6 +39,7 @@ const loginUser = async (payload: UserSchema) => {
     config.jwt.jwt_refresh_secret as Secret,
     String(config.jwt.jwt_refresh_exipired) as string,
   );
+  console.log({ refreshToken });
   return { accessToken, refreshToken, email };
 };
 

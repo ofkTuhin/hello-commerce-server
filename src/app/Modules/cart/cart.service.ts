@@ -33,18 +33,20 @@ const updateCart = async (
   id: string,
   payload: Partial<ICart>
 ): Promise<ICart | null> => {
-  const existCart = await Cart.findOne({ id: id });
+  const existCart = await Cart.findOne({ product: id });
   if (!existCart) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Cart not found");
   }
   const updateCartData: Partial<ICart> = {
     ...payload,
   };
+  console.log(payload);
   // local guardian
 
-  const result = await Cart.findOneAndUpdate({ id }, updateCartData, {
+  const result = await Cart.findOneAndUpdate({ product: id }, updateCartData, {
     new: true,
   });
+  console.log(result);
   return result;
 };
 

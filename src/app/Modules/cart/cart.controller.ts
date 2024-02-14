@@ -32,7 +32,7 @@ const getAllCarts = catchAsync(async (req: Request, res: Response) => {
 
 const updateCart = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
-  const updatedData = req.body.updatedCart;
+  const updatedData = req.body;
   // console.log(first)
   const result = await CartService.updateCart(id, updatedData);
   sendResponse<ICart>(res, {
