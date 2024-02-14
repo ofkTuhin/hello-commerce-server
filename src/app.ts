@@ -5,7 +5,10 @@ import { globalErrorhandler } from "./app/middleware/globalerrorhandler";
 import routes from "./app/routes/routes";
 const app: Application = express();
 // Define an array of allowed origins
-const allowlist = ["http://example1.com", "http://example2.com"];
+const allowlist = [
+  "https://hello-commerce-client.vercel.app",
+  "http://localhost:3001/",
+];
 const corsOptionsDelegate = function (req: any, callback: any) {
   let corsOptions;
   if (allowlist.indexOf(req.header("Origin")) !== -1) {
