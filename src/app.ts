@@ -5,22 +5,13 @@ import { globalErrorhandler } from "./app/middleware/globalerrorhandler";
 import routes from "./app/routes/routes";
 const app: Application = express();
 // Define an array of allowed origins
-const allowlist = [
-  "https://hello-commerce-client.vercel.app",
-  "http://localhost:3001/",
-];
-const corsOptionsDelegate = function (req: any, callback: any) {
-  let corsOptions;
-  if (allowlist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
 
 // Configure CORS middleware with multiple allowed origins
-app.use(cors(corsOptionsDelegate));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
