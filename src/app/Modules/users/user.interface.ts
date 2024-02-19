@@ -2,7 +2,7 @@
 import { Model } from "mongoose";
 
 export type UserSchema = {
-  id: string;
+  name: string;
   email: string;
   password: string;
   stripe_customer_id: string;
@@ -11,7 +11,7 @@ export type UserSchema = {
 export type IUserMethod = {
   isUserExist(
     id: string,
-  ): Promise<Pick<UserSchema, "id" | "password" | "email"> | null>;
+  ): Promise<Pick<UserSchema, "name" | "password" | "email"> | null>;
   isPasswordExist(
     givenPassword: string,
     savedPassword: string,

@@ -12,7 +12,7 @@ router.post(
   zodValidationHandler(ProductValidaion.createProductZodSchema),
   productController.creatProductCollection
 );
-router.get("/", productController.getAllProducts);
+router.get("/", auth(), productController.getAllProducts);
 
 router.patch(
   "/:id",

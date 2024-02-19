@@ -16,7 +16,7 @@ router.post(
 );
 router.get(
   "/refresh-token",
-  zodValidationHandler(userZodValiadion.refreshTokenZodSchema),
+
   userController.refreshToken,
 );
 

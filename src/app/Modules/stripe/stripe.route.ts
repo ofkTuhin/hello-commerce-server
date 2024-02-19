@@ -1,6 +1,6 @@
 import express from "express";
-import { checkout } from "./stripe";
+import { paymentIntent } from "./stripe";
 const router = express.Router();
-router.post("/checkout", checkout);
+router.post("/payment-intent", paymentIntent);
 
 export const stripeRouter = router;

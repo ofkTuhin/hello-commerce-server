@@ -10,8 +10,7 @@ import { CartService } from "./cart.service";
 const creatCartCollection = catchAsync(async (req: Request, res: Response) => {
   const cart = req.body;
 
-  const insertCart = await CartService.creatCartCollection(cart);
-  console.log(insertCart);
+  await CartService.creatCartCollection(cart);
   sendResponse<ICart>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -33,7 +32,6 @@ const getAllCarts = catchAsync(async (req: Request, res: Response) => {
 const updateCart = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const updatedData = req.body;
-  // console.log(first)
   const result = await CartService.updateCart(id, updatedData);
   sendResponse<ICart>(res, {
     statusCode: httpStatus.OK,

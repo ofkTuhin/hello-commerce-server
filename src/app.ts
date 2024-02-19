@@ -6,11 +6,17 @@ import routes from "./app/routes/routes";
 const app: Application = express();
 // Define an array of allowed origins
 
-// Configure CORS middleware with multiple allowed origins
-cors({
-  origin: "https://hello-commerce-client.vercel.app", // Replace with your client-side application's origin
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.) to be sent cross-origin
-});
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3001",
+      "http://localhost:3000",
+      "hello-commerce-client.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());

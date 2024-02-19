@@ -8,8 +8,6 @@ import { IRefreshTokenAccess, UserSchema } from "./user.interface";
 import { User } from "./user.model";
 
 const createUser = async (user: UserSchema): Promise<UserSchema> => {
-  const id = user.email.split("@")[0];
-  user.id = id;
   const [newUser] = await User.create([user]);
   return newUser;
 };
@@ -26,21 +24,19 @@ const loginUser = async (payload: UserSchema) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
 
-  const { id: userId, email } = userData;
-
+  const { name, email } = userData;
   const accessToken = jwtHelpers.createToken(
-    { userId, email },
+    { name, email },
     config.jwt.jwt_secret as Secret,
     String(config.jwt.jwt_exipired) as string,
   );
 
   const refreshToken = jwtHelpers.createToken(
-    { userId, email },
+    { name, email },
     config.jwt.jwt_refresh_secret as Secret,
     String(config.jwt.jwt_refresh_exipired) as string,
   );
-  console.log({ refreshToken });
-  return { accessToken, refreshToken, email };
+  return { accessToken, refreshToken, email, name };
 };
 
 // refresh token service
@@ -61,7 +57,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenAccess> => {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
   const newAccessToken = jwtHelpers.createToken(
-    { id: isUserExist.id, email: isUserExist.email },
+    { name: isUserExist.name, email: isUserExist.email },
     config.jwt.jwt_secret as Secret,
     String(config.jwt.jwt_exipired) as string,
   );

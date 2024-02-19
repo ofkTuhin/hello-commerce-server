@@ -11,8 +11,7 @@ const creatProductCollection = catchAsync(
   async (req: Request, res: Response) => {
     const product = req.body;
 
-    const insertProduct = await ProductService.creatProductCollection(product);
-    console.log(insertProduct);
+    await ProductService.creatProductCollection(product);
     sendResponse<IProduct>(res, {
       statusCode: httpStatus.OK,
       success: true,

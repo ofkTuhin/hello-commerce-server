@@ -5,10 +5,9 @@ import { IUserMethod, UserModel, UserSchema } from "./user.interface";
 
 const userSchema = new Schema<UserSchema, UserModel, IUserMethod>(
   {
-    id: {
+    name: {
       type: String,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -33,8 +32,8 @@ const userSchema = new Schema<UserSchema, UserModel, IUserMethod>(
 
 userSchema.methods.isUserExist = async function (
   id: string,
-): Promise<Pick<UserSchema, "id" | "password" | "email"> | null> {
-  return await User.findOne({ email: id }, { id: 1, password: 1, email: 1 });
+): Promise<Pick<UserSchema, "name" | "password" | "email"> | null> {
+  return await User.findOne({ email: id }, { name: 1, password: 1, email: 1 });
 };
 
 // is user exist

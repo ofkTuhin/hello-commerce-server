@@ -40,13 +40,11 @@ const updateCart = async (
   const updateCartData: Partial<ICart> = {
     ...payload,
   };
-  console.log(payload);
   // local guardian
 
   const result = await Cart.findOneAndUpdate({ product: id }, updateCartData, {
     new: true,
   });
-  console.log(result);
   return result;
 };
 
@@ -65,20 +63,7 @@ const deleteCart = async (id: string): Promise<ICart | null> => {
   return deletedCart;
 };
 //  add comment
-const addComment = async (id: string, comment: string) => {
-  const update = await Cart.findOneAndUpdate(
-    {
-      id: id,
-    },
-    {
-      $push: {
-        reviews: comment,
-      },
-    },
-    { new: true }
-  );
-  console.log(update);
-};
+
 export const CartService = {
   getAllCarts,
   creatCartCollection,
@@ -86,5 +71,4 @@ export const CartService = {
   updateCart,
   deleteCart,
   getSingleCartReview,
-  addComment,
 };

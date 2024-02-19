@@ -6,9 +6,8 @@ const createToken = (
   secret: Secret,
   expires: string
 ): string => {
-  console.log(payload);
   return jwt.sign(
-    { id: payload?.userId, email: payload.email },
+    { id: payload?.name, email: payload.email },
     secret as Secret,
     {
       expiresIn: expires,
