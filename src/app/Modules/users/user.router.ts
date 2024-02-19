@@ -14,10 +14,5 @@ router.post(
   zodValidationHandler(userZodValiadion.loginZodSchema),
   userController.loginUser,
 );
-router.get(
-  "/refresh-token",
-
-  userController.refreshToken,
-);
 
 export const userRouter = router;
