@@ -14,7 +14,6 @@ app.use(
       "https://hello-commerce-client.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true,
   })
 );
 
