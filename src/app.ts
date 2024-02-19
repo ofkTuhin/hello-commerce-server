@@ -4,7 +4,6 @@ import { globalErrorhandler } from "./app/middleware/globalerrorhandler";
 import routes from "./app/routes/routes";
 const app: Application = express();
 // Define an array of allowed origins
-
 app.use(cors());
 
 app.use(express.json());
