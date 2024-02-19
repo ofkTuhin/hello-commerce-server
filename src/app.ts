@@ -11,7 +11,7 @@ app.use(
     origin: [
       "http://localhost:3001",
       "http://localhost:3000",
-      "hello-commerce-client.vercel.app",
+      "https://hello-commerce-client.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
